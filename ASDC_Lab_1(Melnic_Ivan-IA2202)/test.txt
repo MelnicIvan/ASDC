@@ -1,0 +1,6 @@
+John,30,0
+Jessy,28,1
+Bob,15,0
+Marilin,25,1
+Robert,45,0
+Edward,50,0
