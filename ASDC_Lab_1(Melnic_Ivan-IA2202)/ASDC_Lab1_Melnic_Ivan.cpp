@@ -104,12 +104,13 @@ int main() {
 	personalities.push_back(human_5);
 	personalities.push_back(human_6);
 
-	std::ofstream _file;
-	_file.open("test.txt");
+	{
+	std::ofstream file;
+	file.open("test.txt");
 
-	if (_file.is_open()) {
+	if (file.is_open()) {
 		for (int i = 0; i < personalities.size(); i++) {
-			if (!serialize(_file, personalities[i])) {
+			if (!serialize(file, personalities[i])) {
 				std::cout << "An error uccured during serialization!" << std::endl;
 				return -1;
 			}
@@ -119,10 +120,12 @@ int main() {
 		std::cout << "File doesn't open!";
 	}
 
-	_file.close();
+	file.close();
+	}
 
 	std::vector<Human> people;
 	Human human_;
+	{
 	std::ifstream file;
 	file.open("test.txt");
 	if (file.is_open()) {
@@ -136,6 +139,7 @@ int main() {
 	}
 
 	file.close();
+	}
 
 	//Algorithms for searching an unsorted array
 	//Linear search in unsorted array
@@ -165,7 +169,6 @@ int main() {
 	else {
 		std::cout << "\nUser with age " << _searchAge << " is missing from the binary tree\n";
 	}
-	//FreeTree(Root);
 	std::cout << std::endl;
 	//==========================================//
 
@@ -202,7 +205,6 @@ int main() {
 	//==========================================//
 
 	printf("\nTime for execution for function BinarySearch in sorted array: %.7f", functionExecutionTime(people, "Marilin", &BinarySearch));
-	
 	printf("\nTime for execution for function LinearSearch in unsorted array: %.7f", functionExecutionTime(people, "Marilin", &LinearSearchInUnsortedArray));
 	printf("\nTime for execution for function InterpolationSearch in sorted array: %.7f", functionExecutionTime(people, 45, &InterpolationSearch));
 	printf("\nTime for execution for function BinaryTreeSearch in unsorted array: %.7f", functionExecutionTime(Root, 28, &BinaryTreeSearch));
