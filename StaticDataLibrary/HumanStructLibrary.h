@@ -5,6 +5,7 @@
 #include <string_view>
 #include <string>
 #include <array>
+#include <cassert>
 
 namespace StaticDataLibrary {
 	// === Constants ===

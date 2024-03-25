@@ -21,9 +21,12 @@ namespace StaticDataLibrary {
 
 	Node* insertAfter(LinkedList* list, Node* node, Human human);
 	FindNodeResult findByName(LinkedList* list, std::array<char, MAX_SIZE> name);
+	Human* removeFromStart(LinkedList* list);
 	void removeAfter(LinkedList* list, Node* node);
 	void assertNoCycles(LinkedList* list);
 	int numberOfNodesInTheList(LinkedList* list);
 	void printList(LinkedList* list);
-	bool isEmpty(LinkedList* list);
+	bool isEmpty(const LinkedList* list);
+	Node* addNodeToStart(LinkedList* list, Human* human);
+	Node* addNodeToEnd(LinkedList* list, Human* human);
 }

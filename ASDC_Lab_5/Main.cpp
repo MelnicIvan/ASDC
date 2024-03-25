@@ -1,29 +1,50 @@
-#define ARRAY_IMPL true
+#define ARRAY_IMPL false
 #if ARRAY_IMPL
 #include "stackOnArray.h"
 #else
 #include "stackOnList.h"
 #endif
 
+#include "queue.h"
+
+
 int main() {
-	std::cout << "Enter the number of elements" << std::endl;
-	size_t maxElementCount;
-	std::cin >> maxElementCount;
-	Stack stack = createDynamicStack(maxElementCount);
-
+	Stack stack{};
 	auto humans = StaticDataLibrary::createHumans();
-	//StaticDataLibrary::printHumanInfo(humans[0]);
+	push(&stack, humans[0]);
+	push(&stack, humans[1]);
+	push(&stack, humans[2]);
 
-	for (int i = 0; i < maxElementCount; i++) {
-		push(&stack, &humans[i]);
+
+	StaticDataLibrary::Human* hmn = getLastElement(&stack);
+	//StaticDataLibrary::printHumanInfo(*hmn);
+
+	push(&stack, humans[3]);
+
+	assert(!isEmpty(&stack));
+	pop(&stack);
+
+	assert(!isEmpty(&stack));
+
+
+
+	//   === Queue ===   //
+
+	Queue queue{};
+
+	for (auto elem : humans) {
+		enqueue(&queue, &elem);
 	}
 
-	size_t elementCount = getElementCount(&stack);
-	for (size_t i = 0; i < elementCount; i++) {
-		StaticDataLibrary::Human* topElement = pop(&stack);
-		StaticDataLibrary::printHumanInfo(*topElement);
+	std::cout << "First element from Queue: \n";
+	StaticDataLibrary::Node* frontHuman = front(&queue);
+	StaticDataLibrary::printHumanInfo(frontHuman->human);
+
+	std::cout << std::endl;
+	std::cout << "All elements from Queue: \n";
+	while (!isEmpty(&queue)) {
+		StaticDataLibrary::Human* human = dequeue(&queue);
+		StaticDataLibrary::printHumanInfo(*human);
+		std::cout << std::endl;
 	}
-
-
-	destroyDynamicStack(&stack);
 }

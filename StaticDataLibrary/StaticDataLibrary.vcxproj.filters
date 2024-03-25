@@ -23,7 +23,7 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="DataLibrary.cpp">
+    <ClCompile Include="HumanStructFunctions.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="ListFunctions.cpp">

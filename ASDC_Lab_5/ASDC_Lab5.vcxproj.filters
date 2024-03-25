@@ -26,5 +26,8 @@
     <ClInclude Include="stackOnList.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
+    <ClInclude Include="queue.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

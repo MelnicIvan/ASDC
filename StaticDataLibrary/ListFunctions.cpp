@@ -4,7 +4,7 @@
 
 namespace StaticDataLibrary {
 
-	bool isEmpty(LinkedList* list) {
+	bool isEmpty(const LinkedList* list) {
 		return list->first == nullptr;
 	}
 
@@ -81,6 +81,23 @@ namespace StaticDataLibrary {
 		return FindNodeResult(nullptr, nullptr);
 	}
 
+	Human* removeFromStart(LinkedList* list) {
+		assert(list->first != nullptr);
+
+		Node* firstNode = list->first;
+		Node* secondNode = firstNode->next;
+
+		if (firstNode == list->last) {
+			list->last = nullptr;
+		}
+
+		list->first = secondNode;
+
+		Human human = firstNode->human;
+		delete firstNode;
+		return &human;
+	}
+
 	//Удаляет нод следующий данному ноду из списка
 	void removeAfter(LinkedList* list, Node* node) {
 		if (isEmpty(list)) {
@@ -123,5 +140,37 @@ namespace StaticDataLibrary {
 			currentNumberOfNodes++;
 			currentNode = currentNode->next;
 		}
+	}
+
+	Node* addNodeToStart(LinkedList* list, Human* human) {
+		Node* newNode = new Node;
+		newNode->next = list->first;
+		newNode->human = *human;
+
+		list->first = newNode;
+
+		if (list->last == nullptr) {
+			list->last = newNode;
+		}
+
+		return newNode;
+	}
+
+	Node* addNodeToEnd(LinkedList* list, Human* human) {
+		Node* newNode = new Node;
+		newNode->next = nullptr;
+		newNode->human = *human;
+
+		if (list->last != nullptr) {
+			list->last->next = newNode;
+		}
+
+		list->last = newNode;
+
+		if (list->first == nullptr) {
+			list->first = newNode;
+		}
+
+		return newNode;
 	}
 }

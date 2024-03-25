@@ -1,68 +1,39 @@
 #include <iostream>
 #include <assert.h>
+#include <vector>
 #include "HumanStructLibrary.h"
 
 
 struct Stack {
-	StaticDataLibrary::Human* arr;
-	size_t maxElementCount;
-	size_t currentIndex;
+	std::vector<StaticDataLibrary::Human*> underlyingArray;
 };
 
-Stack createDynamicStack(size_t maxElementCount);
 bool isEmpty(const Stack* stack);
 void push(Stack* stack, StaticDataLibrary::Human* human);
 StaticDataLibrary::Human* getLastElement(Stack* stack);
 StaticDataLibrary::Human* pop(Stack* stack);
-size_t getElementCount(Stack* stack);
-void destroyDynamicStack(Stack* stack);
 
 
-void push(Stack* stack, StaticDataLibrary::Human* human) {
-	size_t maxElementCount = stack->maxElementCount;
-	assert(stack->currentIndex < maxElementCount);
-
-	stack->arr[stack->currentIndex] = *human;
-	stack->currentIndex = stack->currentIndex + 1;
+void push(Stack* stack, StaticDataLibrary::Human human) {
+	stack->underlyingArray.push_back(&human);
 }
 
-size_t getElementCount(Stack* stack) {
-	return stack->currentIndex;
-}
+
 
 StaticDataLibrary::Human* pop(Stack* stack) {
-	assert(getElementCount(stack) > 0);
-	size_t newCurrentIndex = stack->currentIndex - 1;
-	StaticDataLibrary::Human* human = &stack->arr[newCurrentIndex];
-	stack->currentIndex = newCurrentIndex;
-	return human;
+	assert(!isEmpty(stack));
+	size_t lastIndex = stack->underlyingArray.size() - 1;
+	StaticDataLibrary::Human* lastElement = stack->underlyingArray[lastIndex];
+	stack->underlyingArray.resize(lastIndex);
+	return lastElement;
 }
 
 bool isEmpty(const Stack* stack) {
-	if (stack->currentIndex > 0)
-		return true;
-	return false;
+	return stack->underlyingArray.size() == 0;
 }
 
 StaticDataLibrary::Human* getLastElement(Stack* stack) {
-	if (isEmpty(stack))
-		std::cout << "Stack is empty!" << std::endl;
-
-	return &stack->arr[stack->currentIndex];
+	int lastIndex = stack->underlyingArray.size() - 1;
+	return stack->underlyingArray[lastIndex];
 }
 
-void destroyDynamicStack(Stack* stack) {
-	free(stack->arr);
-}
-
-Stack createDynamicStack(size_t maxElementCount) {
-	void* memoryBlock = malloc(maxElementCount * sizeof(StaticDataLibrary::Human));
-	StaticDataLibrary::Human* arr = (StaticDataLibrary::Human*)memoryBlock;
-
-	Stack stack;
-	stack.arr = arr;
-	stack.maxElementCount = maxElementCount;
-	stack.currentIndex = 0;
-
-	return stack;
-}

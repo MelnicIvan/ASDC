@@ -139,7 +139,7 @@
     <ClInclude Include="ListLibrary.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="DataLibrary.cpp" />
+    <ClCompile Include="HumanStructFunctions.cpp" />
     <ClCompile Include="ListFunctions.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -4,7 +4,7 @@ namespace StaticDataLibrary {
 
 	//Данные для функции(Объекты Human)
 	// createHumans() возвращает вектор объектов
-	 std::vector<Human> createHumans() {
+	std::vector<Human> createHumans() {
 		std::vector<Human> result;
 		result.push_back({
 			"John",

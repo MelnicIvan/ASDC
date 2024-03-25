@@ -141,6 +141,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="queue.h" />
     <ClInclude Include="stackOnArray.h" />
     <ClInclude Include="stackOnList.h" />
   </ItemGroup>
